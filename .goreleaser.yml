@@ -1,0 +1,36 @@
+builds:
+  - main: ./cmd/socont
+    binary: socont
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+archives:
+  - format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+checksum:
+  name_template: "checksums.txt"
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+changelog:
+  disable: true
+brews:
+  - repository:
+      owner: chebread
+      name: homebrew-socont
+      branch: master
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+
+    homepage: "https://github.com/chebread/socont"
+    description: "Sound controller."
+    license: "MIT"
+
+    install: |
+      bin.install "socont"
