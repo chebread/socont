@@ -25,6 +25,8 @@ type Env struct {
 var ProgramEnv Env
 
 func main() {
+	lx
+
 	ProgramEnv.Name = os.Args[0]
 	ProgramEnv.Version = "development"
 
